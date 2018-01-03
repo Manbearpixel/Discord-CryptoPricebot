@@ -162,21 +162,21 @@ client.on("message", async message => {
       })
       .catch((err) => {
         console.log('!! Error grabbing prices');
-        console.log(err);
 
-        cb(null, false);
+        let errMessage = err.message || err;
+        cb(errMessage);
       })
     }, (err, results) => {
+
       if (err) {
         console.log(`## ERR :: Async Err`);
         console.log(err);
-        console.log(err.message);
 
         if (err === 'Crypto not found') {
           message.channel.send('*beep-boop* I was unable to locate information about your requested crypto!');
         }
         else {
-          message.channel.send(`*beep-boop* An error occurred while processing your request!`);
+          message.channel.send(`*beep-boop* An error occurred while processing your request! -- ${err}`);
         }
       }
       else {
