@@ -170,15 +170,22 @@ client.on("message", async message => {
       if (err) {
         console.log(`## ERR :: Async Err`);
         console.log(err);
+        console.log(err.message);
 
-        message.channel.send(`*beep-boop* I encountered an issue grabbing the requested information!\n\`${err}\``);
+        if (err === 'Crypto not found') {
+          message.channel.send('*beep-boop* I was unable to locate information about your requested crypto!');
+        }
+        else {
+          message.channel.send(`*beep-boop* An error occurred while processing your request!`);
+        }
       }
-
-      let reply = '';
-      for (res of results) {
-        reply += res;
+      else {
+        let reply = '';
+        for (res of results) {
+          reply += res;
+        }
+        message.channel.send(reply);
       }
-      message.channel.send(reply);
     });
   }
 });
