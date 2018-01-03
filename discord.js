@@ -15,8 +15,36 @@ const settings  = require("./settings.json");
 const RefreshTime = (7 * 60 * 1000);
 
 
-
 /*  Internal Methods */
+
+let allowedChannels = [];
+let setupChannelRestrictons = () => {
+  if (settings.allowedChannels) {
+    if (typeof settings.allowedChannels === 'string') {
+      allowedChannels.push(settings.allowedChannels);
+    }
+    else {
+      for (let channel of settings.allowedChannels) {
+        allowedChannels.push(channel);
+      }
+    }
+
+    console.log(`## Restricted usage to only: ${allowedChannels.join(',')}`);
+  }
+};
+
+let isAllowedChannel = (channelName) => {
+  if (!allowedChannels.length) return true;
+
+  let regFind = new RegExp(`^${channelName}$`, 'i');
+  for(let channel of allowedChannels) {
+    if (regFind.test(channel) === true) {
+      return true;
+    }
+  }
+
+  return false;
+};
 
 let updateStatusID = null;
 let updateStatus = (status) => {
@@ -115,6 +143,9 @@ client.on("message", async message => {
   // ignore messages not starting with prefix
   if(message.content.indexOf(config.prefix) !== 0) return;
 
+  // ignore messages from unapproved channels
+  if(!isAllowedChannel(message.channel.name)) return;
+
   // Here we separate the "command" and optional "arguments"
   const args = message.content.slice(config.prefix.length).trim().split(/ +/g);
   const command = args.shift().toLowerCase();
@@ -191,3 +222,4 @@ client.on("message", async message => {
 });
 
 client.login(config.token);
+setupChannelRestrictons();

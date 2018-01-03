@@ -1,6 +1,6 @@
 {
   "name": "odn-pricebot",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A Crypto-currency Pricebot for Discord Servers",
   "main": "discord.js",
   "dependencies": {

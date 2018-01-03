@@ -1,4 +1,7 @@
 {
   "primaryCrypto": "ODN",
-  "dbName": "crypto_marketcap"
+  "dbName": "crypto_marketcap",
+  "allowedChannels": [
+    "trading"
+  ]
 }
