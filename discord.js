@@ -100,7 +100,7 @@ let simpleVolume = (amount) => {
 };
 
 let buildCryptoPost = (crypto) => {
-  return `${crypto.symbol} | ${crypto.name} ` +
+  return `*#${crypto.rank}* - **${crypto.symbol} | ${crypto.name}** ` +
   `\`${crypto.btc} BTC\` / \`$${crypto.usd.toFixed(4)}\` ` +
   `|| Cap: \`$${simpleVolume(crypto.marketcap)}\` ` +
   `|| 24h Vol: \`$${simpleVolume(crypto.volume_usd)}\` ` +

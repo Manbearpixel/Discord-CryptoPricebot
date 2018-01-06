@@ -1,6 +1,6 @@
 {
   "name": "odn-pricebot",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "A Crypto-currency Pricebot for Discord Servers",
   "main": "discord.js",
   "dependencies": {
@@ -14,6 +14,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "forever start ./forever/production.json",
+    "stop": "forever stop discord-pricebot",
     "dev": "node discord.js"
   },
   "author": "manbearpixel",
