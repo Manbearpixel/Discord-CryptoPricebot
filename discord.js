@@ -64,11 +64,13 @@ let updateUsername = (nickname) => {
 
 let updatePrice = () => {
   updateStatus('Pricebot Updating...');
+  console.log('!! Updating Pricebot primaryCrypto...');
 
   Search.crypto(settings.primaryCrypto)
   .then((crypto) => {
     crypto = crypto[0];
     updateStatus(`${crypto.symbol} $${crypto.usd.toFixed(3)}`);
+    console.log('!! Pricebot updated');
 
     setTimeout(() => {
       updatePrice();
@@ -100,6 +102,7 @@ let simpleVolume = (amount) => {
 let buildCryptoPost = (crypto) => {
   return `${crypto.symbol} | ${crypto.name} ` +
   `\`${crypto.btc} BTC\` / \`$${crypto.usd.toFixed(4)}\` ` +
+  `|| Cap: \`$${simpleVolume(crypto.marketcap)}\` ` +
   `|| 24h Vol: \`$${simpleVolume(crypto.volume_usd)}\` ` +
   `|| 1h: \`${crypto.percent_change_1h}%\` ` +
   `|| 24h: \`${crypto.percent_change_24h}%\` ` +

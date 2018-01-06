@@ -1,0 +1,8 @@
+{
+    "uid": "discord-pricebot",
+    "append": true,
+    "watch": false,
+    "script": "discord.js",
+    "sourceDir": "./",
+    "workingDir": "./"
+}
