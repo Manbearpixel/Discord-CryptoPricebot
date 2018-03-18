@@ -186,6 +186,7 @@ client.on("message", async message => {
     Async.mapSeries(cryptoArr, (crypto, cb) => {
       Search.crypto(crypto)
       .then((results) => {
+        // console.log('$searchResults', results);
 
         let cryptoStatus = '';
         for (crypto of results) {
@@ -196,6 +197,8 @@ client.on("message", async message => {
       })
       .catch((err) => {
         console.log('!! Error grabbing prices');
+        console.log(err);
+        console.log('---');
 
         let errMessage = err.message || err;
         cb(errMessage);
@@ -214,13 +217,18 @@ client.on("message", async message => {
         }
       }
       else {
-        let channelName = (message.channel.name) ? message.channel.name : '??';
-        let guildName = (message.channel.parent.name) ? message.channel.parent.name : '??';
+        let channelName = '??';
+        let guildName = '??';
+        try {
+          channelName = message.channel.name;
+          guildName = message.channel.guild.name;
+        } catch (err) { console.log('Unable to determine origin'); }
 
-        console.log(`>> Positng result to ${guildName}::${channelName}`);
+        console.log(`>> Posting result to ${guildName}::${channelName}`);
+
         try {
           console.log(JSON.stringify(results + '\n'));
-        } catch (err) { }
+        } catch (err) {}
 
         let reply = '';
         for (res of results) {
