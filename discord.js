@@ -219,7 +219,7 @@ client.on("message", async message => {
 
         console.log(`>> Positng result to ${guildName}::${channelName}`);
         try {
-          console.log(JSON.stringify(results + '\n');
+          console.log(JSON.stringify(results + '\n'));
         } catch err { }
 
         let reply = '';
