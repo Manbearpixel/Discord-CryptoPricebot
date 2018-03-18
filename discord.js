@@ -214,6 +214,14 @@ client.on("message", async message => {
         }
       }
       else {
+        let channelName = (message.channel.name) ? message.channel.name : '??';
+        let guildName = (message.channel.parent.name) ? message.channel.parent.name : '??';
+
+        console.log(`>> Positng result to ${guildName}::${channelName}`);
+        try {
+          console.log(JSON.stringify(results + '\n');
+        } catch err { }
+
         let reply = '';
         for (res of results) {
           reply += res;
