@@ -240,5 +240,16 @@ client.on("message", async message => {
   }
 });
 
+client.on('disconnect', (e) => {
+  let _err = (e.reason) ? e.reason : e;
+  let _errCode = (e.code) ? e.code : 'xxx';
+  console.log(`!! Client Disconnect !!`, _errCode, _err);
+});
+
+client.on('error', (e) => {
+  let _err = (e.message) ? e.message : e;
+  console.log(`!! Client Error !!`, _err);
+});
+
 client.login(config.token);
 setupChannelRestrictons();
